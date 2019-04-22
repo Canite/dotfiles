@@ -1,6 +1,9 @@
 " Leader
 let mapleader = " "
 
+scriptencoding utf-8
+set encoding=utf-8
+
 set backspace=2 " Backspace deletes like most programs in insert mode
 set nocompatible " Use Vim settings, rather then Vi settings
 set nobackup
@@ -56,7 +59,7 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile *.py set filetype=python
-  autocmd BufRead,BufNewFile *.asm,*.inc set filetype=asm_ca65
+  autocmd BufRead,BufNewFile *.asm,.inc set filetype=asm_ca65
   autocmd BufEnter *.py set ai sw=4 ts=4 sta et fo=croql
 
 " Enable spellchecking for Markdown
@@ -119,7 +122,7 @@ if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
 
-nnoremap <leader>g :wa <bar> :Shell make && make run <CR>
+nnoremap <leader>g :wa <bar> :make && make run <CR>
 nnoremap <C-b> :wa <bar> :qa <CR>
 nnoremap <silent> j gj
 nnoremap <silent> k gk
@@ -182,26 +185,6 @@ function! GetVisual() range
   return escaped_selection
 endfunction
 
-command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
-function! s:RunShellCommand(cmdline)
-  echo a:cmdline
-  let expanded_cmdline = a:cmdline
-  for part in split(a:cmdline, ' ')
-     if part[0] =~ '\v[%#<]'
-        let expanded_part = fnameescape(expand(part))
-        let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
-     endif
-  endfor
-  botright new
-  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  call setline(1, 'You entered:    ' . a:cmdline)
-  call setline(2, 'Expanded Form:  ' .expanded_cmdline)
-  call setline(3,substitute(getline(2),'.','=','g'))
-  execute '$read !'. expanded_cmdline
-  setlocal nomodifiable
-  1
-endfunction
-
 vmap <C-r> <Esc>:%s/<c-r>=GetVisual()<cr>//gc<left><left><left>
 vmap * <Esc>/<c-r>=GetVisual()<cr><CR>
 
@@ -211,7 +194,7 @@ let python_highlight_all = 1
 
 autocmd vimenter * NERDTree
 autocmd vimenter * wincmd l
-"autocmd vimenter * Tagbar
+autocmd vimenter * Tagbar
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "python from powerline.vim import setup as powerline_setup
