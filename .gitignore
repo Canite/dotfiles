@@ -1,0 +1,7 @@
+*.log
+*logs/
+.config/discord/
+.config/obs-studio/
+.config/godot/recent_dirs
+.config/aseprite/sessions/
+.config/aseprite/files/

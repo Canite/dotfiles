@@ -36,3 +36,5 @@ require('neo-tree').setup {
     }
   }
 }
+
+vim.diagnostic.config({signs = false})

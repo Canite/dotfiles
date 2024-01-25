@@ -26,7 +26,7 @@ vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', opts)
 vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', opts)
 
 -- Neo tree
-vim.keymap.set('n', '<space>n', ':Neotree toggle<CR>', opts)
+vim.keymap.set('n', '<leader>n', ':Neotree toggle<CR>', opts)
 
 -- Telescope
 local builtin = require('telescope.builtin')
@@ -34,6 +34,9 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, opts)
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, opts)
 vim.keymap.set('n', '<leader>fb', builtin.buffers, opts)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, opts)
+
+-- Make
+vim.keymap.set('n', '<leader>m', ':make<CR>', opts)
 
 -- BufferLine
 vim.keymap.set('n', '<leader>b', ':BufferLinePick<CR>', opts)
