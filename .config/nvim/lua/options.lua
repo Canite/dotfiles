@@ -2,6 +2,11 @@
 vim.opt.clipboard = 'unnamedplus'   -- use system clipboard 
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 vim.opt.mouse = 'a'                 -- allow the mouse to be used in Nvim
+vim.api.nvim_set_option('updatetime', 300)
+vim.cmd([[
+set signcolumn=yes
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
 
 -- Tab
 vim.opt.tabstop = 4                 -- number of visual spaces per TAB
